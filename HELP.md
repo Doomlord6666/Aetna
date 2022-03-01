@@ -1,8 +1,3 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'aetna.come.aetna-healthcare' is invalid and this project uses 'aetna.come.aetnahealthcare' instead.
-
 # Getting Started
 
 ### Reference Documentation
