@@ -38,6 +38,7 @@ pipeline {
         stage ('Create Docker image'){  
             steps{  
                 sh"""  
+                whoami
                 docker build -t dockerfile .
                 """  
             }  
