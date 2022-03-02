@@ -46,7 +46,7 @@ pipeline {
         stage ('Create Docker run'){  
             steps{  
                 sh"""  
-                docker run dockerfile
+                docker run -p 8080:8080 dockerfile
                 """  
             }  
         } 
