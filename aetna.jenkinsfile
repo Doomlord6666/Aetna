@@ -38,7 +38,7 @@ pipeline {
         stage ('Create Docker image'){  
             steps{  
                 sh"""  
-                docker build dockerfile .
+                docker build -t dockerfile .
                 """  
             }  
         } 
