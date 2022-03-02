@@ -35,6 +35,27 @@ pipeline {
                 """  
             }  
         }  
+        stage ('Create Docker image'){  
+            steps{  
+                sh"""  
+                docker build dockerfile .
+                """  
+            }  
+        } 
+        stage ('Create Docker run'){  
+            steps{  
+                sh"""  
+                docker run dockerfile
+                """  
+            }  
+        } 
+        stage ('Function Test'){  
+            steps{  
+                sh"""  
+                
+                """  
+            }  
+        } 
         stage ('clean up'){
             steps{
                 sh"""
