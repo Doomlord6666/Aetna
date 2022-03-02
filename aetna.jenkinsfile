@@ -1,0 +1,46 @@
+pipeline { 
+    agent any
+    tools { 
+        maven 'MyMaven' 
+        jdk 'MyJava'  
+    }       
+    stages { 
+        stage ('Checkout the code') { 
+            steps { 
+                git branch: 'master', 
+                credentialsId: 'git hub aetna',
+                url: 'git@github.com:Doomlord6666/Aetna.git'
+            } 
+        } 
+        stage ('Build the code') { 
+            steps { 
+                sh """ 
+                echo compile the 
+                mvn compile 
+                """ 
+            } 
+        }    
+        stage ('JUNIT Test') { 
+            steps { 
+                sh """ 
+                echo compile the code 
+                mvn test 
+                """ 
+            } 
+        }             
+        stage ('Package the code'){  
+            steps{  
+                sh"""  
+                mvn package  
+                """  
+            }  
+        }  
+        stage ('clean up'){
+            steps{
+                sh"""
+                rm ${WORKSPACE}/* -f -r
+                """
+            }
+        }   
+    } 
+} 
