@@ -68,6 +68,9 @@ pipeline {
         stage ('clean up'){
             steps{
                 sh"""
+                docker stop bsafe_${BUILD_NUMBER}
+                docker rm bsafe_${BUILD_NUMBER}
+                docker image rm bsafe:${BUILD_NUMBER}
                 rm ${WORKSPACE}/* -f -r
                 """
             }
