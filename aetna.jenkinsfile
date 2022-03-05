@@ -39,7 +39,7 @@ pipeline {
             steps{  
                 sh"""  
                 whoami
-                docker build -t bsae_${BUILD_NUMBER} .
+                docker build -t bsafe_${BUILD_NUMBER} .
                 """  
             } 
         } 
