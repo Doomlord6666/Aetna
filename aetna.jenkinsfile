@@ -3,7 +3,10 @@ pipeline {
     tools { 
         maven 'MyMaven' 
         jdk 'MyJava'  
-    }       
+    }   
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('docker_hub')
+	}    
     stages { 
         stage ('Checkout the code') { 
             steps { 
@@ -20,7 +23,7 @@ pipeline {
                 """ 
             } 
         }    
-        stage ('JUNIT Test') { 
+        stage ('UNIT Test') { 
             steps { 
                 sh """ 
                 echo compile the code 
@@ -65,6 +68,15 @@ pipeline {
                 '''.stripIndent())
             }  
         } 
+        stage ('Push image to image repo'){
+            steps{
+                sh"""
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                docker push bsafe:${BUILD_NUMBER}
+                docker logout
+                """
+            }
+        }
         stage ('clean up'){
             steps{
                 sh"""
