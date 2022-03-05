@@ -53,6 +53,7 @@ pipeline {
         stage ('Function Test'){  
             steps{  
                 sh(returnStdout: true, script: '''#!/bin/bash
+                sleep 10
                 HTTP=$(curl localhost:8080 --silent)
                 if [ "$HTTP" == "Greetings from aetna healthcare!" ]; then
                     echo test passed
