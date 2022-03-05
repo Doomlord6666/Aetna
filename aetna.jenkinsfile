@@ -39,14 +39,14 @@ pipeline {
             steps{  
                 sh"""  
                 whoami
-                docker build -t dockerfile .
+                docker build -t bsafe_${BUILD_NUMBER} .
                 """  
             }  
-        } 
+        } bsaf
         stage ('Create Docker run'){  
             steps{  
                 sh"""  
-                docker run -d -p 8080:8080 --name ${BUILD_NUMBER} dockerfile
+                docker run -d -p 8080:8080 --name bsafe_${BUILD_NUMBER} dockerfile
                 """  
             }  
         } 
