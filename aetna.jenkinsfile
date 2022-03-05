@@ -18,7 +18,7 @@ pipeline {
         stage ('Build the code') { 
             steps { 
                 sh """ 
-                echo compile the 
+                echo Compiling...
                 mvn compile 
                 """ 
             } 
@@ -26,7 +26,7 @@ pipeline {
         stage ('UNIT Test') { 
             steps { 
                 sh """ 
-                echo compile the code 
+                echo Unit Testing...
                 mvn test 
                 """ 
             } 
@@ -34,14 +34,15 @@ pipeline {
         stage ('Package the code'){  
             steps{  
                 sh"""  
-                mvn package  
+                echo Packaging... 
+                mvn package
                 """  
             }  
         }  
         stage ('Create Docker image'){  
             steps{  
                 sh"""  
-                whoami
+                echo Building Image...
                 docker build -t doomlord6666/aetna:${BUILD_NUMBER} .
                 """  
             } 
@@ -49,6 +50,7 @@ pipeline {
         stage ('Perform Docker run'){  
             steps{  
                 sh"""  
+                echo Running Application...
                 docker run -d -p 8080:8080 --name bsafe_${BUILD_NUMBER} doomlord6666/aetna:${BUILD_NUMBER}
                 """  
             }  
@@ -85,6 +87,7 @@ pipeline {
                 docker stop bsafe_${BUILD_NUMBER}
                 docker rm bsafe_${BUILD_NUMBER}
                 docker image rm doomlord6666/aetna:${BUILD_NUMBER}
+                docker image rm doomlord6666/aetna:latest
                 rm ${WORKSPACE}/* -f -r
                 """
             }
