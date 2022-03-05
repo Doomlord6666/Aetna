@@ -38,18 +38,18 @@ pipeline {
                 """  
             }  
         }  
-        stage ('Create Docker image'){  
+        stage ('Create Docker  image'){  
             steps{  
                 sh"""  
                 whoami
-                docker build -t bsafe:${BUILD_NUMBER} .
+                docker build -t doomlord6666/aetna:${BUILD_NUMBER} .
                 """  
             } 
         } 
         stage ('Create Docker run'){  
             steps{  
                 sh"""  
-                docker run -d -p 8080:8080 --name bsafe_${BUILD_NUMBER} bsafe:${BUILD_NUMBER}
+                docker run -d -p 8080:8080 --name bsafe_${BUILD_NUMBER} doomlord6666/aetna:${BUILD_NUMBER}
                 """  
             }  
         } 
@@ -72,7 +72,7 @@ pipeline {
             steps{
                 sh"""
                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                docker push bsafe:${BUILD_NUMBER}
+                docker push doomlord6666/aetna:${BUILD_NUMBER}
                 docker logout
                 """
             }
@@ -82,7 +82,7 @@ pipeline {
                 sh"""
                 docker stop bsafe_${BUILD_NUMBER}
                 docker rm bsafe_${BUILD_NUMBER}
-                docker image rm bsafe:${BUILD_NUMBER}
+                docker image rm doomlord6666/aetna:${BUILD_NUMBER}
                 rm ${WORKSPACE}/* -f -r
                 """
             }
