@@ -53,7 +53,7 @@ pipeline {
         stage ('Function Test'){  
             steps{  
                 sh"""  
-                
+                bash function_test.sh
                 """  
             }  
         } 
