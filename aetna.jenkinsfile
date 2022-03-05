@@ -38,7 +38,7 @@ pipeline {
                 """  
             }  
         }  
-        stage ('Create Docker image'){  
+        stage ('Create Docker  image'){  
             steps{  
                 sh"""  
                 whoami
