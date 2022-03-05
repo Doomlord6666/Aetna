@@ -73,6 +73,8 @@ pipeline {
                 sh"""
                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
                 docker push doomlord6666/aetna:${BUILD_NUMBER}
+                docker tag doomlord6666/aetna:${BUILD_NUMBER} doomlord6666/aetna:latest
+                docker push doomlord6666/aetna:latest
                 docker logout
                 """
             }
