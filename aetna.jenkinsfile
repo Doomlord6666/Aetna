@@ -38,7 +38,7 @@ pipeline {
                 """  
             }  
         }  
-        stage ('Create Docker  image'){  
+        stage ('Create Docker image'){  
             steps{  
                 sh"""  
                 whoami
@@ -46,7 +46,7 @@ pipeline {
                 """  
             } 
         } 
-        stage ('Create Docker run'){  
+        stage ('Perform Docker run'){  
             steps{  
                 sh"""  
                 docker run -d -p 8080:8080 --name bsafe_${BUILD_NUMBER} doomlord6666/aetna:${BUILD_NUMBER}
